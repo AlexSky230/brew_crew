@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "562203852086",
+    "project_id": "sky-brew-crew",
+    "storage_bucket": "sky-brew-crew.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562203852086:android:66e5428d7d6e36ddab4797",
+        "android_client_info": {
+          "package_name": "com.example.sky_brew_crew"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "562203852086-gquv1shp51la9umvp18o6h9kaucmg2ff.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjMeDDukGHo-0XIZMyJA9B1W7GpBxtwnk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "562203852086-gquv1shp51la9umvp18o6h9kaucmg2ff.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
