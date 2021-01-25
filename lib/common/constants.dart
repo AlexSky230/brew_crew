@@ -8,7 +8,7 @@ final textImportDecoration = InputDecoration(
   ),
   focusedBorder: OutlineInputBorder(
     borderSide: BorderSide(
-        color: Colors.brown[400],
+        color: Colors.pink[400],
         width: 2
     ),
   ),
