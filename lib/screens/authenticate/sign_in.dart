@@ -32,7 +32,7 @@ class _SignInState extends State<SignIn> {
       appBar: AppBar(
           backgroundColor: Colors.brown[400],
           elevation: 0,
-          title: Text('Sign in to Sky BrewCrew'),
+          title: Text('Sign in to Coffee Crew'),
           actions: [
             FlatButton.icon(
                 onPressed: () {
@@ -44,6 +44,13 @@ class _SignInState extends State<SignIn> {
           ],
       ),
       body: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/coffee_bg.png'),
+              colorFilter: new ColorFilter.mode(Colors.brown.withOpacity(0.3), BlendMode.multiply),
+              fit: BoxFit.cover,
+            )
+        ),
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
         child: Form(
           key: _formKey,

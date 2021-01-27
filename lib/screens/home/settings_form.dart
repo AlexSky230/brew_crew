@@ -87,10 +87,40 @@ class _SettingsFormState extends State<SettingsForm> {
                     items: sugars.map((sugar) {
                       return DropdownMenuItem(
                         value: sugar,
-                        child: Text('$sugar sugars'),
+                        child: Text('$sugar sugar(s)'),
                       );
                     }).toList(),
                     onChanged: (val) => setState(() => _currentSugars = val),
+                  ),
+                  SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'S',
+                          style: TextStyle(
+                              color: Colors.brown[200],
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          'M',
+                          style: TextStyle(
+                            color: Colors.brown[500],
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          'L',
+                          style: TextStyle(
+                            color: Colors.brown[800],
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   Slider(
                     label: setCurrentSizeLabel(_currentSize ?? userData.size),

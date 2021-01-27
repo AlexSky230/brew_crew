@@ -2,23 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:sky_brew_crew/models/brew.dart';
 
 class BrewTile extends StatelessWidget {
-
   final Brew brew;
+
   BrewTile({this.brew});
 
   int iconRadius;
 
-  double setIconRadius(int size) {
+  String getSizeLetter(int size) {
     switch (size) {
-      case 1: {
-        return 10;
-      }
-      case 3: {
-        return 30;
-      }
-      default: {
-        return 20;
-      }
+      case 1:
+        {
+          return 'S';
+        }
+      case 3:
+        {
+          return 'L';
+        }
+      default:
+        {
+          return 'M';
+        }
     }
   }
 
@@ -29,10 +32,23 @@ class BrewTile extends StatelessWidget {
       child: Card(
         margin: EdgeInsets.fromLTRB(20, 6, 20, 0),
         child: ListTile(
-          leading: CircleAvatar(
-            backgroundImage: AssetImage('assets/images/coffee_icon.png'),
-            radius: setIconRadius(brew.size),
-            backgroundColor: Colors.brown[brew.size * 200],
+          leading: Stack(
+            alignment: Alignment.center,
+            children: [
+              CircleAvatar(
+                backgroundImage: AssetImage('assets/images/coffee_icon.png'),
+                radius: 30,
+                backgroundColor: Colors.brown[800],
+              ),
+              Text(
+                getSizeLetter(brew.size),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 28,
+                  color: Colors.white,
+                ),
+              ),
+            ],
           ),
           title: Text(brew.name),
           subtitle: Text('${brew.type} with ${brew.sugars} sugar(s)'),

@@ -31,7 +31,7 @@ class _RegisterState extends State<Register> {
       appBar: AppBar(
           backgroundColor: Colors.brown[400],
           elevation: 0,
-          title: Text('Sign up to Sky BrewCrew'),
+          title: Text('Sign up to Coffee Crew'),
         actions: [
           FlatButton.icon(
             onPressed: () {
@@ -43,6 +43,13 @@ class _RegisterState extends State<Register> {
         ],
       ),
       body: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/coffee_bg.png'),
+              colorFilter: new ColorFilter.mode(Colors.brown.withOpacity(0.3), BlendMode.multiply),
+              fit: BoxFit.cover,
+            )
+        ),
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
         child: Form(
           key: _formKey,

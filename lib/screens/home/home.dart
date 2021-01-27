@@ -17,7 +17,7 @@ class Home extends StatelessWidget {
     void _showSettingsPanel() {
       showModalBottomSheet(isScrollControlled: true, context: context, builder: (context) {
         return Container(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.fromLTRB(20, 50, 20, 0),
           child: SettingsForm(),
         );
       });
@@ -28,7 +28,7 @@ class Home extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.brown[50],
         appBar: AppBar(
-          title: Text('Brew Crew'),
+          title: Text('Coffee Crew'),
           backgroundColor: Colors.brown[400],
           elevation: 0,
           actions: <Widget>[
@@ -51,6 +51,7 @@ class Home extends StatelessWidget {
             image: DecorationImage(
               image: AssetImage('assets/images/coffee_bg.png'),
               fit: BoxFit.cover,
+              colorFilter: new ColorFilter.mode(Colors.brown.withOpacity(0.3), BlendMode.multiply),
             )
           ),
             child: BrewList()
