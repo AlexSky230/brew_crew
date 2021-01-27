@@ -1,10 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sky_brew_crew/models/brew.dart';
-import 'package:sky_brew_crew/screens/home/brew_list.dart';
+import 'package:sky_brew_crew/screens/home/settings_form.dart';
 import 'package:sky_brew_crew/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:sky_brew_crew/services/database.dart';
+
+import 'brew_list.dart';
 
 class Home extends StatelessWidget {
 
@@ -12,6 +13,18 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    void _showSettingsPanel() {
+      showModalBottomSheet(context: context, builder: (context) {
+        return SingleChildScrollView( // this widget adds scroll functionality
+          child: Container(
+            padding: EdgeInsets.all(20),
+            child: SettingsForm(),
+          ),
+        );
+      });
+    }
+
     return StreamProvider<List<Brew>>.value(
       value: DatabaseService().brews,
       child: Scaffold(
@@ -27,10 +40,23 @@ class Home extends StatelessWidget {
                 },
                 icon: Icon(Icons.person),
                 label: Text('Log out'),
-            )
+            ),
+            FlatButton.icon(
+                onPressed: () => _showSettingsPanel(),
+                icon: Icon(Icons.settings),
+                label: Text('Settings'),
+            ),
           ],
         ),
-        body: BrewList(),
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/coffee_bg.png'),
+              fit: BoxFit.cover,
+            )
+          ),
+            child: BrewList()
+        ),
       ),
     );
   }

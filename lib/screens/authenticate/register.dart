@@ -50,7 +50,7 @@ class _RegisterState extends State<Register> {
             children: [
               SizedBox(height: 20),
               TextFormField(
-                decoration: textImportDecoration.copyWith(hintText: 'Email'),
+                decoration: textInputDecoration.copyWith(hintText: 'Email'),
                 validator: (val) => val.isEmpty ? 'Enter an Email' : null,
                 onChanged: (val) {
                   setState(() {
@@ -60,7 +60,7 @@ class _RegisterState extends State<Register> {
               ),
               SizedBox(height: 20),
               TextFormField(
-                decoration: textImportDecoration.copyWith(hintText: 'Password'),
+                decoration: textInputDecoration.copyWith(hintText: 'Password'),
                 validator: (val) => val.length < 6 ? 'Enter a Password longer then 5 characters' : null,
                 obscureText: true,
                 onChanged: (val) {
