@@ -15,12 +15,10 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
 
     void _showSettingsPanel() {
-      showModalBottomSheet(context: context, builder: (context) {
-        return SingleChildScrollView( // this widget adds scroll functionality
-          child: Container(
-            padding: EdgeInsets.all(20),
-            child: SettingsForm(),
-          ),
+      showModalBottomSheet(isScrollControlled: true, context: context, builder: (context) {
+        return Container(
+          padding: EdgeInsets.all(20),
+          child: SettingsForm(),
         );
       });
     }

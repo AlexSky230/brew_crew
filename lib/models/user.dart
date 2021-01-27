@@ -12,8 +12,8 @@ class UserData {
   final String name;
   final String type;
   final String sugars;
-  final int strength;
+  final int size;
 
-  UserData({this.uid, this.name, this.type, this.sugars, this.strength});
+  UserData({this.uid, this.name, this.type, this.sugars, this.size});
 
 }

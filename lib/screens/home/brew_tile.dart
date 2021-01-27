@@ -6,6 +6,22 @@ class BrewTile extends StatelessWidget {
   final Brew brew;
   BrewTile({this.brew});
 
+  int iconRadius;
+
+  double setIconRadius(int size) {
+    switch (size) {
+      case 1: {
+        return 10;
+      }
+      case 3: {
+        return 30;
+      }
+      default: {
+        return 20;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,8 +31,8 @@ class BrewTile extends StatelessWidget {
         child: ListTile(
           leading: CircleAvatar(
             backgroundImage: AssetImage('assets/images/coffee_icon.png'),
-            radius: 25,
-            backgroundColor: Colors.brown[brew.strength],
+            radius: setIconRadius(brew.size),
+            backgroundColor: Colors.brown[brew.size * 200],
           ),
           title: Text(brew.name),
           subtitle: Text('${brew.type} with ${brew.sugars} sugar(s)'),
