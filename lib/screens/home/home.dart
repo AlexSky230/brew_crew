@@ -4,12 +4,14 @@ import 'package:sky_brew_crew/screens/home/settings_form.dart';
 import 'package:sky_brew_crew/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:sky_brew_crew/services/database.dart';
+import 'package:intl/intl.dart';
 
 import 'brew_list.dart';
 
 class Home extends StatelessWidget {
 
   final AuthService _auth = AuthService();
+  final String now = DateFormat("MMM-dd").format(DateTime.now());
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +56,23 @@ class Home extends StatelessWidget {
               colorFilter: new ColorFilter.mode(Colors.brown.withOpacity(0.3), BlendMode.multiply),
             )
           ),
-            child: BrewList()
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Column(
+                children: [
+                  Text(
+                    'Active orders:',
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+
+                  ),
+                  Container(height: 600, child: BrewList()),
+                ],
+              ),
+            )
         ),
       ),
     );

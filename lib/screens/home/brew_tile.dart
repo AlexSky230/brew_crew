@@ -32,6 +32,7 @@ class BrewTile extends StatelessWidget {
       child: Card(
         margin: EdgeInsets.fromLTRB(20, 6, 20, 0),
         child: ListTile(
+          isThreeLine: brew.type.length > 20,
           leading: Stack(
             alignment: Alignment.center,
             children: [
