@@ -9,8 +9,9 @@ class DatabaseService {
    //collection reference
   final CollectionReference brewCollection = FirebaseFirestore.instance.collection('brews');
 
-  Future updateUserData(String sugars, String name, int size, String type) async {
+  Future updateUserData(bool isOrderActive, String sugars, String name, int size, String type) async {
     return await brewCollection.doc(uid).set({
+      'isOrderActive': isOrderActive,
       'sugars': sugars,
       'name': name,
       'size': size,
@@ -20,14 +21,17 @@ class DatabaseService {
 
   // brew list from snapshot
   List<Brew> _brewListFromSnapshots(QuerySnapshot snapshot) {
-    return snapshot.docs.map((doc) {
-      print(doc.data()['name']);
-      return Brew(
-        name: doc.data()['name'] ?? '',
-        size: doc.data()['size'] ?? 2,
-        sugars: doc.data()['sugars'] ?? '0',
-        type: doc.data()['type'] ?? '',
-      );
+    var filtered = snapshot.docs.where((el) => el.data()['isOrderActive'] == true);
+    return filtered.map((doc) {
+      print(doc.data());
+        return Brew(
+          name: doc.data()['name'] ?? '',
+          size: doc.data()['size'] ?? 1,
+          sugars: doc.data()['sugars'] ?? '0',
+          type: doc.data()['type'] ?? '',
+          isOrderActive: doc.data()['isOrderActive'] ?? false,
+        );
+      // }
     }).toList();
   }
 
@@ -39,6 +43,7 @@ class DatabaseService {
       type: snapshot.data()['type'],
       sugars: snapshot.data()['sugars'],
       size: snapshot.data()['size'],
+      isOrderActive: snapshot.data()['isOrderActive'],
     );
   }
 

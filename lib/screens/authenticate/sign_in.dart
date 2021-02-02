@@ -1,9 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sky_brew_crew/common/constants.dart';
 import 'package:sky_brew_crew/common/loading.dart';
 import 'package:sky_brew_crew/services/auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -36,7 +34,7 @@ class _SignInState extends State<SignIn> {
             appBar: AppBar(
               backgroundColor: Colors.brown[400],
               elevation: 0,
-              title: Text('Sign in to Coffee Crew'),
+              title: Text('Sign in to Coffee Train'),
               actions: [
                 FlatButton.icon(
                   onPressed: () {
@@ -103,52 +101,53 @@ class _SignInState extends State<SignIn> {
                       },
                     ),
                     SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        RaisedButton(
-                          color: Colors.pink[400],
-                          child: Text(
-                            'ITC Sign In',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          onPressed: () async {
-                            if (_formKey.currentState.validate()) {
-                              setState(() {
-                                loading = true;
-                              });
+                    RaisedButton(
+                      color: Colors.pink[400],
+                      child: Text(
+                        'ITC Sign In',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () async {
+                        if (_formKey.currentState.validate()) {
+                          setState(() {
+                            loading = true;
+                          });
 
-                              dynamic result = await _auth
-                                  .signInWithEmailAndPassword(email, password);
+                          dynamic result = await _auth
+                              .signInWithEmailAndPassword(email, password);
 
-                              if (result == null) {
-                                setState(() {
-                                  error = 'Incorrect Username or Password';
-                                  loading = false;
-                                });
-                              }
-                            }
-                          },
-                        ),
-                        RaisedButton(
-                          color: Colors.pink[400],
-                          child: Text(
-                            'Barista Sign In',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          onPressed: () async {
-                            dynamic result = await _auth.signInAnon();
+                          if (result == null) {
+                            setState(() {
+                              error = 'Incorrect Username or Password';
+                              loading = false;
+                            });
+                          }
+                        }
+                      },
+                    ),
+                    Divider(height: 40, thickness: 1, color: Colors.black,),
+                    Text(
+                      'Not ITC member?',
+                          style: TextStyle(fontSize: 18),
+                    ),
+                    SizedBox(height: 15),
+                    RaisedButton(
+                      color: Colors.pink[400],
+                      child: Text(
+                        'Sign In as Barista',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () async {
+                        dynamic result = await _auth.signInAnon();
 
-                            if (result == null) {
-                              setState(() {
-                                error =
-                                    'Could not log in. Please try again later';
-                                loading = false;
-                              });
-                            }
-                          },
-                        ),
-                      ],
+                        if (result == null) {
+                          setState(() {
+                            error =
+                                'Could not log in. Please try again later';
+                            loading = false;
+                          });
+                        }
+                      },
                     ),
                     SizedBox(height: 12),
                     Text(

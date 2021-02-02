@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sky_brew_crew/models/brew.dart';
+import 'package:sky_brew_crew/models/user.dart';
 
-class BrewTile extends StatelessWidget {
+class BrewTile extends StatefulWidget {
   final Brew brew;
 
   BrewTile({this.brew});
 
+  @override
+  _BrewTileState createState() => _BrewTileState();
+}
+
+class _BrewTileState extends State<BrewTile> {
   int iconRadius;
+
+  bool isOrderDone = false;
 
   String getSizeLetter(int size) {
     switch (size) {
@@ -27,12 +36,19 @@ class BrewTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<AppUser>(context);
     return Padding(
       padding: EdgeInsets.only(top: 8),
       child: Card(
         margin: EdgeInsets.fromLTRB(20, 6, 20, 0),
         child: ListTile(
-          isThreeLine: brew.type.length > 20,
+          minVerticalPadding: 10,
+          trailing: IconButton(
+            onPressed: user.isBarista ? () {
+              setState(() => isOrderDone = !isOrderDone);
+            } : null,
+            icon: Icon(Icons.check, color: isOrderDone ? Colors.pink : Colors.grey),
+          ),
           leading: Stack(
             alignment: Alignment.center,
             children: [
@@ -42,7 +58,7 @@ class BrewTile extends StatelessWidget {
                 backgroundColor: Colors.brown[800],
               ),
               Text(
-                getSizeLetter(brew.size),
+                getSizeLetter(widget.brew.size),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 28,
@@ -51,8 +67,8 @@ class BrewTile extends StatelessWidget {
               ),
             ],
           ),
-          title: Text(brew.name),
-          subtitle: Text('${brew.type} with ${brew.sugars} sugar(s)'),
+          title: Text(widget.brew.name),
+          subtitle: Text('${widget.brew.type} with ${widget.brew.sugars} sugar(s)'),
         ),
       ),
     );

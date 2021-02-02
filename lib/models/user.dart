@@ -14,7 +14,8 @@ class UserData {
   final String type;
   final String sugars;
   final int size;
+  final bool isOrderActive;
 
-  UserData({this.uid, this.name, this.type, this.sugars, this.size});
+  UserData({this.uid, this.name, this.type, this.sugars, this.size, this.isOrderActive});
 
 }

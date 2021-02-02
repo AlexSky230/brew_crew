@@ -33,7 +33,7 @@ class _RegisterState extends State<Register> {
       appBar: AppBar(
           backgroundColor: Colors.brown[400],
           elevation: 0,
-          title: Text('Sign up to Coffee Crew'),
+          title: Text('Sign up to Coffee Train'),
         actions: [
           FlatButton.icon(
             onPressed: () {
@@ -103,7 +103,7 @@ class _RegisterState extends State<Register> {
               RaisedButton(
                 color: Colors.pink[400],
                 child: Text(
-                  'Register',
+                  'Register as ITC member',
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {

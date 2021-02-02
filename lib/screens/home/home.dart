@@ -33,7 +33,7 @@ class Home extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.brown[50],
         appBar: AppBar(
-          title: Text('Coffee Crew'),
+          title: Text('Coffee Train'),
           backgroundColor: Colors.brown[400],
           elevation: 0,
           actions: <Widget>[
@@ -67,7 +67,7 @@ class Home extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    'Active orders:',
+                    'Active Orders:',
                     style: TextStyle(
                       fontSize: 24,
                       color: Colors.black,

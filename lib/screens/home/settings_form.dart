@@ -15,6 +15,7 @@ class _SettingsFormState extends State<SettingsForm> {
   final List<String> sugars = ['0', '1', '2', '3', '4'];
 
   // form values
+  bool _currentIsOrderActive;
   String _currentName;
   String _currentSugars;
   String _currentType;
@@ -138,7 +139,18 @@ class _SettingsFormState extends State<SettingsForm> {
                       });
                     },
                   ),
-                  //slider
+                  CheckboxListTile(
+                    controlAffinity: ListTileControlAffinity.leading,
+                    title: Text('Make Order active', style: TextStyle(fontWeight: FontWeight.bold)),
+                    activeColor: Colors.pink,
+                    value: _currentIsOrderActive ?? userData.isOrderActive,
+                    onChanged: (newValue) {
+                      setState(() {
+                        _currentIsOrderActive = newValue;
+                        print(_currentIsOrderActive);
+                      });
+                    },
+                  ),
                   RaisedButton(
                     color: Colors.pink[400],
                     child: Text(
@@ -148,6 +160,7 @@ class _SettingsFormState extends State<SettingsForm> {
                     onPressed: () async {
                       if (_formKey.currentState.validate()) {
                         await DatabaseService(uid: user.uid).updateUserData(
+                          _currentIsOrderActive ?? userData.isOrderActive,
                           _currentSugars ?? userData.sugars,
                           _currentName ?? userData.name,
                           _currentSize ?? userData.size,
@@ -157,6 +170,7 @@ class _SettingsFormState extends State<SettingsForm> {
                       }
                     },
                   ),
+                  SizedBox(height: 15),
                 ],
               ),
             );
