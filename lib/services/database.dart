@@ -23,7 +23,6 @@ class DatabaseService {
   List<Brew> _brewListFromSnapshots(QuerySnapshot snapshot) {
     var filtered = snapshot.docs.where((el) => el.data()['isOrderActive'] == true);
     return filtered.map((doc) {
-      print(doc.data());
         return Brew(
           name: doc.data()['name'] ?? '',
           size: doc.data()['size'] ?? 1,

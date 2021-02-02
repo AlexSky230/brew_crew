@@ -127,7 +127,7 @@ class _SignInState extends State<SignIn> {
                     ),
                     Divider(height: 40, thickness: 1, color: Colors.black,),
                     Text(
-                      'Not ITC member?',
+                      'Not an ITC member?',
                           style: TextStyle(fontSize: 18),
                     ),
                     SizedBox(height: 15),

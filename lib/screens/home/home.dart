@@ -22,7 +22,7 @@ class Home extends StatelessWidget {
     void _showSettingsPanel() {
       showModalBottomSheet(isScrollControlled: true, context: context, builder: (context) {
         return Container(
-          padding: EdgeInsets.fromLTRB(20, 50, 20, 0),
+          padding: EdgeInsets.fromLTRB(20, 40, 20, 0),
           child: SettingsForm(),
         );
       });
@@ -44,41 +44,48 @@ class Home extends StatelessWidget {
                 icon: Icon(Icons.person),
                 label: Text('Log out'),
             ),
-            Visibility(
-              visible: !user.isBarista,
-              child: FlatButton.icon(
-                  onPressed: () => _showSettingsPanel(),
-                  icon: Icon(Icons.settings),
-                  label: Text('Settings'),
-              ),
-            ),
           ],
+        ),
+        floatingActionButton: Visibility(
+          visible: !user.isBarista,
+          child: FloatingActionButton(
+            elevation: 5,
+            backgroundColor: Colors.pink,
+            onPressed: () => _showSettingsPanel(),
+            child: Icon(Icons.add, size: 30),
+            ),
         ),
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/images/coffee_bg.png'),
               fit: BoxFit.cover,
-              colorFilter: new ColorFilter.mode(Colors.brown.withOpacity(0.3), BlendMode.multiply),
+              colorFilter: new ColorFilter.mode(Colors.brown.withOpacity(0.2), BlendMode.multiply),
             )
           ),
             child: Padding(
               padding: const EdgeInsets.only(top: 20),
-              child: Column(
-                children: [
-                  Text(
-                    'Active Orders:',
-                    style: TextStyle(
-                      fontSize: 24,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Text(
+                      'Active Orders:',
+                      style: TextStyle(
+                        fontSize: 24,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
 
-                  ),
-                  SingleChildScrollView(
-                      child: Container(height: 600, child: BrewList())
-                  ),
-                ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 200),
+                      child: Container(
+                        height: MediaQuery.of(context).size.height - 150,
+                        child: BrewList()
+                      ),
+                    ),
+                  ],
+                ),
               ),
             )
         ),

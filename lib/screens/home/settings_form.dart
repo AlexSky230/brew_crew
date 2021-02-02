@@ -67,7 +67,9 @@ class _SettingsFormState extends State<SettingsForm> {
                   SizedBox(height: 30),
                   TextFormField(
                     initialValue: userData.name,
-                    decoration: textInputDecoration,
+                    decoration: textInputDecoration.copyWith(
+                      hintText: 'Your Name...'
+                    ),
                     validator: (val) =>
                         val.isEmpty ? 'Please enter a name' : null,
                     onChanged: (val) => setState(() => _currentName = val),
@@ -75,7 +77,9 @@ class _SettingsFormState extends State<SettingsForm> {
                   SizedBox(height: 10),
                   TextFormField(
                     initialValue: userData.type,
-                    decoration: textInputDecoration,
+                    decoration: textInputDecoration.copyWith(
+                        hintText: 'Your Beverage...'
+                    ),
                     validator: (val) =>
                         val.isEmpty ? 'Please specify your beverage' : null,
                     onChanged: (val) => setState(() => _currentType = val),
@@ -147,7 +151,6 @@ class _SettingsFormState extends State<SettingsForm> {
                     onChanged: (newValue) {
                       setState(() {
                         _currentIsOrderActive = newValue;
-                        print(_currentIsOrderActive);
                       });
                     },
                   ),
