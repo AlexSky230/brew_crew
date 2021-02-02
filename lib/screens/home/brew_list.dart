@@ -15,11 +15,15 @@ class _BrewListState extends State<BrewList> {
 
     final brews = Provider.of<List<Brew>>(context) ?? [];
 
-    return ListView.builder(
-      itemCount: brews.length,
-      itemBuilder: (context, index) {
-        return BrewTile(brew: brews[index]);
-      },
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 80),
+      child: ListView.builder(
+        scrollDirection: Axis.vertical,
+        itemCount: brews.length,
+        itemBuilder: (context, index) {
+          return BrewTile(brew: brews[index]);
+        },
+      ),
     );
   }
 }
