@@ -16,11 +16,11 @@ class _SettingsFormState extends State<SettingsForm> {
 
   // form values
   bool _currentIsOrderActive;
+  int _currentSize;
   String _currentName;
+  String _currentSizeLabel;
   String _currentSugars;
   String _currentType;
-  int _currentSize;
-  String _currentSizeLabel;
 
   @override
   Widget build(BuildContext context) {
