@@ -1,8 +1,9 @@
 class AppUser {
 
   final String uid;
+  final bool isBarista ;
 
-  AppUser({ this.uid });
+  AppUser({ this.uid, this.isBarista });
 
 }
 

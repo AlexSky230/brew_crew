@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sky_brew_crew/models/brew.dart';
+import 'package:sky_brew_crew/models/user.dart';
 import 'package:sky_brew_crew/screens/home/settings_form.dart';
 import 'package:sky_brew_crew/services/auth.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +16,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final user = Provider.of<AppUser>(context);
 
     void _showSettingsPanel() {
       showModalBottomSheet(isScrollControlled: true, context: context, builder: (context) {
@@ -41,10 +44,13 @@ class Home extends StatelessWidget {
                 icon: Icon(Icons.person),
                 label: Text('Log out'),
             ),
-            FlatButton.icon(
-                onPressed: () => _showSettingsPanel(),
-                icon: Icon(Icons.settings),
-                label: Text('Settings'),
+            Visibility(
+              visible: !user.isBarista,
+              child: FlatButton.icon(
+                  onPressed: () => _showSettingsPanel(),
+                  icon: Icon(Icons.settings),
+                  label: Text('Settings'),
+              ),
             ),
           ],
         ),
@@ -69,7 +75,9 @@ class Home extends StatelessWidget {
                     ),
 
                   ),
-                  Container(height: 600, child: BrewList()),
+                  SingleChildScrollView(
+                      child: Container(height: 600, child: BrewList())
+                  ),
                 ],
               ),
             )

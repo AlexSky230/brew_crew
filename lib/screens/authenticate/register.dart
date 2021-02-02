@@ -16,6 +16,8 @@ class _RegisterState extends State<Register> {
 
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>(); //validation form key
+  final _emailController = TextEditingController();
+  final _passController = TextEditingController();
   bool loading = false;
 
   // text field state
@@ -57,8 +59,19 @@ class _RegisterState extends State<Register> {
             children: [
               SizedBox(height: 20),
               TextFormField(
-                decoration: textInputDecoration.copyWith(hintText: 'Email'),
-                validator: (val) => val.isEmpty ? 'Enter an Email' : null,
+                controller: _emailController,
+                decoration: textInputDecoration.copyWith(
+                  hintText: 'Email',
+                  suffixIcon: IconButton(
+                      icon: Icon(Icons.clear),
+                      onPressed: () {
+                        _emailController.clear();
+                      }),
+                ),
+                validator: (val) => (val.isEmpty ||
+                    val.indexOf('@inthecode.com.au') == -1)
+                    ? 'Please provide valid ITC email'
+                    : null,
                 onChanged: (val) {
                   setState(() {
                     email = val;
@@ -67,8 +80,18 @@ class _RegisterState extends State<Register> {
               ),
               SizedBox(height: 20),
               TextFormField(
-                decoration: textInputDecoration.copyWith(hintText: 'Password'),
-                validator: (val) => val.length < 6 ? 'Enter a Password longer then 5 characters' : null,
+                controller: _passController,
+                decoration: textInputDecoration.copyWith(
+                  hintText: 'Password',
+                  suffixIcon: IconButton(
+                      icon: Icon(Icons.clear),
+                      onPressed: () {
+                        _passController.clear();
+                      }),
+                ),
+                validator: (val) => val.length < 6
+                    ? 'Password must be longer then 5 characters'
+                    : null,
                 obscureText: true,
                 onChanged: (val) {
                   setState(() {
@@ -90,7 +113,7 @@ class _RegisterState extends State<Register> {
                     dynamic result = await _auth.registerWithEmailAndPassword(email, password);
                     if (result == null){
                       setState(() {
-                        error = 'please supply valid email and password';
+                        error = 'Please supply valid email and password';
                         this.loading = false;
                       });
                     }
