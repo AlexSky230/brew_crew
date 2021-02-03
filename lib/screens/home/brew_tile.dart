@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sky_brew_crew/models/brew.dart';
 import 'package:sky_brew_crew/models/user.dart';
+import 'package:sky_brew_crew/common/text_constants.dart' as text;
 
 class BrewTile extends StatefulWidget {
   final Brew brew;
@@ -53,7 +54,7 @@ class _BrewTileState extends State<BrewTile> {
             alignment: Alignment.center,
             children: [
               CircleAvatar(
-                backgroundImage: AssetImage('assets/images/coffee_icon.png'),
+                backgroundImage: AssetImage(text.coffeeIconUrl),
                 radius: 30,
                 backgroundColor: Colors.brown[800],
               ),

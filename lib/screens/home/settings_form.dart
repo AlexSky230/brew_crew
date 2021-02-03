@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sky_brew_crew/common/constants.dart';
+import 'package:sky_brew_crew/common/decoration_constants.dart';
 import 'package:sky_brew_crew/common/loading.dart';
 import 'package:sky_brew_crew/models/user.dart';
 import 'package:sky_brew_crew/services/database.dart';
+import 'package:sky_brew_crew/common/text_constants.dart' as text;
 
 class SettingsForm extends StatefulWidget {
   @override
@@ -30,17 +31,17 @@ class _SettingsFormState extends State<SettingsForm> {
       switch (size) {
         case 1:
           {
-            return 'Size: Small';
+            return text.sm;
           }
 
         case 3:
           {
-            return 'Size: Large';
+            return text.lg;
           }
 
         default:
           {
-            return 'Size: Medium';
+            return text.md;
           }
       }
     }
@@ -59,7 +60,7 @@ class _SettingsFormState extends State<SettingsForm> {
                   children: <Widget>[
                     SizedBox(height: 10),
                     Text(
-                      'Update your brew settings:',
+                      text.updateOrder,
                       style: TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
@@ -70,20 +71,20 @@ class _SettingsFormState extends State<SettingsForm> {
                     TextFormField(
                       initialValue: userData.name,
                       decoration: textInputDecoration.copyWith(
-                        hintText: 'Your Name...'
+                        hintText: text.name
                       ),
                       validator: (val) =>
-                          val.isEmpty ? 'Please enter a name' : null,
+                          val.isEmpty ? text.name : null,
                       onChanged: (val) => setState(() => _currentName = val),
                     ),
                     SizedBox(height: 10),
                     TextFormField(
                       initialValue: userData.type,
                       decoration: textInputDecoration.copyWith(
-                          hintText: 'Your Beverage...'
+                          hintText: text.beverage
                       ),
                       validator: (val) =>
-                          val.isEmpty ? 'Please specify your beverage' : null,
+                          val.isEmpty ? text.specifyBeverage : null,
                       onChanged: (val) => setState(() => _currentType = val),
                     ),
                     SizedBox(height: 10),
@@ -94,7 +95,7 @@ class _SettingsFormState extends State<SettingsForm> {
                       items: sugars.map((sugar) {
                         return DropdownMenuItem(
                           value: sugar,
-                          child: Text('$sugar sugar(s)'),
+                          child: Text('$sugar ${text.sugars}'),
                         );
                       }).toList(),
                       onChanged: (val) => setState(() => _currentSugars = val),
@@ -147,7 +148,7 @@ class _SettingsFormState extends State<SettingsForm> {
                     ),
                     CheckboxListTile(
                       controlAffinity: ListTileControlAffinity.leading,
-                      title: Text('Make Order active', style: TextStyle(fontWeight: FontWeight.bold)),
+                      title: Text(text.makeActive, style: TextStyle(fontWeight: FontWeight.bold)),
                       activeColor: Colors.pink,
                       value: _currentIsOrderActive ?? userData.isOrderActive,
                       onChanged: (newValue) {
@@ -159,7 +160,7 @@ class _SettingsFormState extends State<SettingsForm> {
                     RaisedButton(
                       color: Colors.pink[400],
                       child: Text(
-                        'Update',
+                        text.update,
                         style: TextStyle(color: Colors.white),
                       ),
                       onPressed: () async {

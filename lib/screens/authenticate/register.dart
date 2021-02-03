@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sky_brew_crew/common/constants.dart';
+import 'package:sky_brew_crew/common/decoration_constants.dart';
 import 'package:sky_brew_crew/common/loading.dart';
 import 'package:sky_brew_crew/services/auth.dart';
+import 'package:sky_brew_crew/common/text_constants.dart' as text;
 
 class Register extends StatefulWidget {
 
@@ -32,26 +33,19 @@ class _RegisterState extends State<Register> {
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
           backgroundColor: Colors.brown[400],
-          elevation: 0,
-          title: Text('Sign up to Coffee Train'),
+          title: Text(text.signUp),
         actions: [
           FlatButton.icon(
             onPressed: () {
               widget.toggleView();
             },
             icon: Icon(Icons.person),
-            label: Text('Sign In'),
+            label: Text(text.signIn),
           ),
         ],
       ),
       body: Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/coffee_bg.png'),
-              colorFilter: new ColorFilter.mode(Colors.brown.withOpacity(0.3), BlendMode.multiply),
-              fit: BoxFit.cover,
-            )
-        ),
+        decoration: backgroundImage,
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
         child: Form(
           key: _formKey,
@@ -61,7 +55,7 @@ class _RegisterState extends State<Register> {
               TextFormField(
                 controller: _emailController,
                 decoration: textInputDecoration.copyWith(
-                  hintText: 'Email',
+                  hintText: text.email,
                   suffixIcon: IconButton(
                       icon: Icon(Icons.clear),
                       onPressed: () {
@@ -69,8 +63,8 @@ class _RegisterState extends State<Register> {
                       }),
                 ),
                 validator: (val) => (val.isEmpty ||
-                    val.indexOf('@inthecode.com.au') == -1)
-                    ? 'Please provide valid ITC email'
+                    val.indexOf(text.itcMail) == -1)
+                    ? text.provideValidEmail
                     : null,
                 onChanged: (val) {
                   setState(() {
@@ -82,7 +76,7 @@ class _RegisterState extends State<Register> {
               TextFormField(
                 controller: _passController,
                 decoration: textInputDecoration.copyWith(
-                  hintText: 'Password',
+                  hintText: text.password,
                   suffixIcon: IconButton(
                       icon: Icon(Icons.clear),
                       onPressed: () {
@@ -90,7 +84,7 @@ class _RegisterState extends State<Register> {
                       }),
                 ),
                 validator: (val) => val.length < 6
-                    ? 'Password must be longer then 5 characters'
+                    ? text.mustBeLonger
                     : null,
                 obscureText: true,
                 onChanged: (val) {
@@ -103,7 +97,7 @@ class _RegisterState extends State<Register> {
               RaisedButton(
                 color: Colors.pink[400],
                 child: Text(
-                  'Register as ITC member',
+                  text.registerItc,
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
@@ -113,7 +107,7 @@ class _RegisterState extends State<Register> {
                     dynamic result = await _auth.registerWithEmailAndPassword(email, password);
                     if (result == null){
                       setState(() {
-                        error = 'Please supply valid email and password';
+                        error = text.logInError;
                         this.loading = false;
                       });
                     }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sky_brew_crew/common/constants.dart';
+import 'package:sky_brew_crew/common/decoration_constants.dart';
 import 'package:sky_brew_crew/common/loading.dart';
 import 'package:sky_brew_crew/services/auth.dart';
+import 'package:sky_brew_crew/common/text_constants.dart' as text;
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -33,26 +34,19 @@ class _SignInState extends State<SignIn> {
             backgroundColor: Colors.brown[100],
             appBar: AppBar(
               backgroundColor: Colors.brown[400],
-              elevation: 0,
-              title: Text('Sign in to Coffee Train'),
+              title: Text(text.signIn),
               actions: [
                 FlatButton.icon(
                   onPressed: () {
                     widget.toggleView();
                   },
                   icon: Icon(Icons.person),
-                  label: Text('Register'),
+                  label: Text(text.register),
                 ),
               ],
             ),
             body: Container(
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                image: AssetImage('assets/images/coffee_bg.png'),
-                colorFilter: new ColorFilter.mode(
-                    Colors.brown.withOpacity(0.3), BlendMode.multiply),
-                fit: BoxFit.cover,
-              )),
+              decoration: backgroundImage,
               padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
               child: Form(
                 key: _formKey,
@@ -62,16 +56,15 @@ class _SignInState extends State<SignIn> {
                     TextFormField(
                       controller: _emailController,
                       decoration: textInputDecoration.copyWith(
-                        hintText: 'Email',
+                        hintText: text.email,
                         suffixIcon: IconButton(
                             icon: Icon(Icons.clear),
                             onPressed: () {
                               _emailController.clear();
                             }),
                       ),
-                      validator: (val) => (val.isEmpty ||
-                              val.indexOf('@inthecode.com.au') == -1)
-                          ? 'Please provide valid ITC email'
+                      validator: (val) => (val.isEmpty || val.indexOf(text.itcMail) == -1)
+                          ? text.provideValidEmail
                           : null,
                       onChanged: (val) {
                         setState(() {
@@ -83,7 +76,7 @@ class _SignInState extends State<SignIn> {
                     TextFormField(
                       controller: _passController,
                       decoration: textInputDecoration.copyWith(
-                        hintText: 'Password',
+                        hintText: text.password,
                         suffixIcon: IconButton(
                             icon: Icon(Icons.clear),
                             onPressed: () {
@@ -91,7 +84,7 @@ class _SignInState extends State<SignIn> {
                             }),
                       ),
                       validator: (val) => val.length < 6
-                          ? 'Password must be longer then 5 characters'
+                          ? text.mustBeLonger
                           : null,
                       obscureText: true,
                       onChanged: (val) {
@@ -104,7 +97,7 @@ class _SignInState extends State<SignIn> {
                     RaisedButton(
                       color: Colors.pink[400],
                       child: Text(
-                        'ITC Sign In',
+                        text.itcSignIn,
                         style: TextStyle(color: Colors.white),
                       ),
                       onPressed: () async {
@@ -118,7 +111,7 @@ class _SignInState extends State<SignIn> {
 
                           if (result == null) {
                             setState(() {
-                              error = 'Incorrect Username or Password';
+                              error = text.incorrectPass;
                               loading = false;
                             });
                           }
@@ -127,14 +120,14 @@ class _SignInState extends State<SignIn> {
                     ),
                     Divider(height: 40, thickness: 1, color: Colors.black,),
                     Text(
-                      'Not an ITC member?',
-                          style: TextStyle(fontSize: 18),
+                      text.notItc,
+                      style: TextStyle(fontSize: 18),
                     ),
                     SizedBox(height: 15),
                     RaisedButton(
                       color: Colors.pink[400],
                       child: Text(
-                        'Sign In as Barista',
+                        text.baristaSignIn,
                         style: TextStyle(color: Colors.white),
                       ),
                       onPressed: () async {
@@ -142,8 +135,7 @@ class _SignInState extends State<SignIn> {
 
                         if (result == null) {
                           setState(() {
-                            error =
-                                'Could not log in. Please try again later';
+                            error = text.cantLogIn;
                             loading = false;
                           });
                         }
