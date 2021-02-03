@@ -21,10 +21,7 @@ class Home extends StatelessWidget {
 
     void _showSettingsPanel() {
       showModalBottomSheet(isScrollControlled: true, context: context, builder: (context) {
-        return Container(
-          padding: EdgeInsets.fromLTRB(20, 40, 20, 0),
-          child: SettingsForm(),
-        );
+        return SettingsForm();
       });
     }
 
@@ -80,7 +77,7 @@ class Home extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 10, 0, 200),
                       child: Container(
-                        height: MediaQuery.of(context).size.height - 150,
+                        height: MediaQuery.of(context).size.height - 138,
                         child: BrewList()
                       ),
                     ),

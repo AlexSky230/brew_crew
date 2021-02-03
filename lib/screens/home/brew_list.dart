@@ -21,7 +21,7 @@ class _BrewListState extends State<BrewList> {
       itemBuilder: (context, index) {
         bool last = brews.length == (index + 1);
         return Padding(
-          padding: EdgeInsets.only(bottom: last ? 70 : 0),
+          padding: EdgeInsets.only(bottom: last ? 80 : 0),
           child: BrewTile(brew: brews[index]),
         );
       },
